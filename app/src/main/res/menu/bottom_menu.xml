@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_home"
+        android:icon="@drawable/home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/fragment_generator"
+        android:icon="@drawable/generator"
+        android:title="@string/generator"/>
+    <item
+        android:id="@+id/fragment_profile"
+        android:icon="@drawable/profile"
+        android:title="@string/profile"/>
+    <item
+        android:id="@+id/fragment_settings"
+        android:icon="@drawable/settings"
+        android:title="@string/settings"
+        />
+</menu>
