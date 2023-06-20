@@ -4,8 +4,8 @@
     <string name="generator">Generator</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
-    
-    
-<!-- TODO: Remove or change this placeholder text -->
+
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
