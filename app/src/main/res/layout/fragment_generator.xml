@@ -39,7 +39,7 @@
 
             <EditText
                 android:id="@+id/inputGeneratorFragment"
-                android:layout_width="260dp"
+                android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="8dp"
                 android:autofillHints="prompt"
