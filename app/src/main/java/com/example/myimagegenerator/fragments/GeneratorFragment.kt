@@ -26,7 +26,7 @@ class GeneratorFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_generator, container, false)
 
-        val recyclerViewImages = view.findViewById<RecyclerView>(R.id.recyclerViewGeneratedImage)
+        val recyclerViewImages = view.findViewById<RecyclerView>(R.id.recyclerViewMyImages)
         val linearLayoutManager = LinearLayoutManager(context)
 
         recyclerViewImages.adapter = ImageAdapter(images, context!!)
