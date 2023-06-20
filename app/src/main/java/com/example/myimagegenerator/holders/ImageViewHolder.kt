@@ -14,7 +14,7 @@ class ImageViewHolder(v: View, private val context: Context) : RecyclerView.View
     }
 
     fun setPrompt(prompt: String) {
-        val txt = this.view.findViewById<TextView>(R.id.txtImageItemPrompt)
+        val txt = this.view.findViewById<TextView>(R.id.txtMyImageItemPrompt)
         txt.text = prompt
     }
 
