@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">MyImageGenerator</string>
-    <string name="home">Home</string>
-    <string name="generator">Generator</string>
-    <string name="profile">Profile</string>
-    <string name="settings">Settings</string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="home">HOME</string>
+    <string name="generator">GENERADOR</string>
+    <string name="profile">PERFIL</string>
+    <string name="settings">CONFIGURACION</string>
+    <string name="generate">GENERAR</string>
+    <string name="image_input">Escribir imagen</string>
+    <string name="save">GUARDAR</string>
+    <string name="variant">VARIANTE</string>
+    <string name="prompt">prompt</string>
+    
+    
+<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
