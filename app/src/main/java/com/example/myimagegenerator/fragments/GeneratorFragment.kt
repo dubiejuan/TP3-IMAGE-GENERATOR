@@ -29,7 +29,7 @@ class GeneratorFragment : Fragment() {
         val recyclerViewImages = view.findViewById<RecyclerView>(R.id.recyclerViewMyImages)
         val linearLayoutManager = LinearLayoutManager(context)
 
-        recyclerViewImages.adapter = ImageAdapter(images, context!!)
+        recyclerViewImages.adapter = ImageAdapter(images, requireContext())
         recyclerViewImages.layoutManager = linearLayoutManager
 
         return view
