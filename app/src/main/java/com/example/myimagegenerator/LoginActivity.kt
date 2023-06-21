@@ -8,16 +8,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import com.example.myimagegenerator.services.saveToken
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.example.myimagegenerator.viewmodel.UserViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+
+
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var userViewModel : UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,13 +63,11 @@ class LoginActivity : AppCompatActivity() {
                                 if (task.isSuccessful) {
 
                                     val token = task.result?.token.toString()
-                                    userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-                                    userViewModel.setUserToken(token)
 
-                                    // Usar la siguiente sentencia en donde se necesite el token para obtenerlo
-                                    // val userToken = userViewModel.getUserToken()
+                                    CoroutineScope(Dispatchers.Main).launch {
+                                        saveToken(applicationContext,token)
+                                    }
 
-                                    Toast.makeText(this, "Token de Usuario: ${userViewModel.getUserToken()}", Toast.LENGTH_SHORT).show()
                                 } else {
                                     Log.w("Firebase", "Error al obtener el token de usuario.", task.exception)
                                 }
@@ -94,4 +96,6 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this,"Please fill all fields", Toast.LENGTH_LONG).show()
         }
     }
+
 }
+

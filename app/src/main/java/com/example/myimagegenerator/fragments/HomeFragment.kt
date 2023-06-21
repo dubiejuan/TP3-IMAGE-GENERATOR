@@ -15,7 +15,6 @@ import com.example.myimagegenerator.services.GPTBuilderApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.GET
 
 class HomeFragment : Fragment() {
     var images: MutableList<Image> = ArrayList<Image>()
@@ -33,25 +32,23 @@ class HomeFragment : Fragment() {
         val recyclerViewImages = view.findViewById<RecyclerView>(R.id.recyclerViewMyImages)
         val linearLayoutManager = LinearLayoutManager(context)
 
-        /*
-        @GET("/image")
-        fun getImages(): Call<List<Image>>
 
-
-        GPTBuilderApi.create().getImages().enqueue(object : Callback<List<Image>> {
+        GPTBuilderApi.create(requireContext()).getImages().enqueue(object : Callback<List<Image>> {
             override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
-                /*
+
                 if (response.isSuccessful) {
                     images = response.body() as MutableList<Image>
                     recyclerViewImages.adapter = ImageAdapter(images, context!!)
                     recyclerViewImages.layoutManager = linearLayoutManager
-                }*/
+                }
             }
             override fun onFailure(call: Call<List<Image>>, t: Throwable) {
                 Log.e("Example", t.stackTraceToString())
             }
         })
-        */
+
         return view
     }
+
+
 }
