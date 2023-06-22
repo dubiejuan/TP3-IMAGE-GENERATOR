@@ -1,13 +1,18 @@
 package com.example.myimagegenerator.holders
 
 import android.content.Context
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myimagegenerator.R
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 class ImageViewHolder(v: View, private val context: Context) : RecyclerView.ViewHolder(v) {
     private var view: View
+    private val imageView: ImageView = itemView.findViewById(R.id.myImgItem)
 
     init {
         this.view = v
@@ -18,4 +23,18 @@ class ImageViewHolder(v: View, private val context: Context) : RecyclerView.View
         txt.text = prompt
     }
 
+    fun setImage(imageUrl: String) {
+        Log.d("ImageHolder", "Image URL: $imageUrl") // Log the imageUrl
+
+        Picasso.get().load(imageUrl).into(imageView, object : Callback {
+            override fun onSuccess() {
+                // Image loaded successfully
+                Log.println(Log.ASSERT,"ImageLoadingSuccess", "Image loaded successfully")
+            }
+
+            override fun onError(e: Exception) {
+                Log.e("ImageLoadingError", e.message, e)
+            }
+        })
+    }
 }

@@ -5,16 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
 
+    <TextView
+        android:id="@+id/txtHomeFragmentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="@string/my_images"
+        android:textColor="@color/light_purple"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMyImages"
             android:layout_width="match_parent"
-            android:layout_height="290dp"
-            android:layout_marginTop="32dp" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
     </LinearLayout>
 </FrameLayout>
