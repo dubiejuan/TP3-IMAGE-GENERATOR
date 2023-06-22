@@ -27,19 +27,23 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val imageAdapter = ImageAdapter(images, requireContext())
+
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         val recyclerViewImages = view.findViewById<RecyclerView>(R.id.recyclerViewMyImages)
-        val linearLayoutManager = LinearLayoutManager(context)
+        recyclerViewImages.adapter = imageAdapter
 
+        val linearLayoutManager = LinearLayoutManager(context)
+        recyclerViewImages.layoutManager = linearLayoutManager
 
         GPTBuilderApi.create(requireContext()).getImages().enqueue(object : Callback<List<Image>> {
             override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
 
                 if (response.isSuccessful) {
                     images = response.body() as MutableList<Image>
-                    recyclerViewImages.adapter = ImageAdapter(images, context!!)
-                    recyclerViewImages.layoutManager = linearLayoutManager
+                    imageAdapter.updateData(images)
+                    imageAdapter.notifyDataSetChanged()
                 }
             }
             override fun onFailure(call: Call<List<Image>>, t: Throwable) {
@@ -49,6 +53,4 @@ class HomeFragment : Fragment() {
 
         return view
     }
-
-
 }
