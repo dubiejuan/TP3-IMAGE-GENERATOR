@@ -13,6 +13,8 @@ import com.squareup.picasso.Picasso
 class ImageViewHolder(v: View, private val context: Context) : RecyclerView.ViewHolder(v) {
     private var view: View
     private val imageView: ImageView = itemView.findViewById(R.id.myImgItem)
+    private var BASEURL =  "https://searchu.s3.amazonaws.com"
+
 
     init {
         this.view = v
@@ -25,8 +27,8 @@ class ImageViewHolder(v: View, private val context: Context) : RecyclerView.View
 
     fun setImage(imageUrl: String) {
         Log.d("ImageHolder", "Image URL: $imageUrl") // Log the imageUrl
-
-        Picasso.get().load(imageUrl).into(imageView, object : Callback {
+        val finalURL = BASEURL + imageUrl;
+        Picasso.get().load(finalURL).into(imageView, object : Callback {
             override fun onSuccess() {
                 // Image loaded successfully
                 Log.println(Log.ASSERT,"ImageLoadingSuccess", "Image loaded successfully")
@@ -37,4 +39,4 @@ class ImageViewHolder(v: View, private val context: Context) : RecyclerView.View
             }
         })
     }
-}
+    }
