@@ -11,11 +11,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myimagegenerator.R
-import com.example.myimagegenerator.adapters.TemporaryImageAdapter
 import com.example.myimagegenerator.entities.ImageRequest
 import com.example.myimagegenerator.models.Image
 import com.example.myimagegenerator.services.GPTBuilderApi
 import androidx.appcompat.widget.AppCompatEditText
+import com.example.myimagegenerator.adapters.ImageAdapter
+import com.example.myimagegenerator.adapters.TemporaryAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,13 +28,11 @@ class GeneratorFragment : Fragment() {
     lateinit var generateImageButton: Button
     lateinit var generateVariantImageButton: Button
     lateinit var saveImageButton: Button
-    lateinit var temporaryImageAdapter : TemporaryImageAdapter
+    lateinit var temporaryAdapter : TemporaryAdapter
 
     lateinit var imagePrompt: AppCompatEditText
     lateinit var imageVariantId: AppCompatEditText
     lateinit var imageToSaveId: AppCompatEditText
-
-//   val temporaryImageAdapter = TemporaryImageAdapter(images, requireContext())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +44,9 @@ class GeneratorFragment : Fragment() {
     ): View? {
 
 
+        val temporaryAdapter = TemporaryAdapter(images, requireContext())
+
+
         val view = inflater.inflate(R.layout.fragment_generator, container, false)
 
         generateImageButton = view.findViewById(R.id.btnGeneratorFragmentGenerate)
@@ -53,11 +55,60 @@ class GeneratorFragment : Fragment() {
         imagePrompt = view.findViewById(R.id.inputGeneratorFragment)
 
 
-        val recyclerViewImages = view.findViewById<RecyclerView>(R.id.recyclerViewMyImages)
-        val linearLayoutManager = LinearLayoutManager(context)
+        val recyclerViewImages = view.findViewById<RecyclerView>(R.id.recyclerViewTemporary)
 
-        recyclerViewImages.adapter = TemporaryImageAdapter(images, requireContext())
+        recyclerViewImages.adapter = temporaryAdapter
+
+        val linearLayoutManager = LinearLayoutManager(context)
         recyclerViewImages.layoutManager = linearLayoutManager
+
+        generateImageButton.setOnClickListener {
+            val imagePromptText = imagePrompt.text.toString()
+            if(imagePromptText.isNullOrEmpty()){
+                Toast.makeText(requireActivity(), "No se han completado el campo requerido", Toast.LENGTH_SHORT).show()
+            }else{
+                val imageRequest = ImageRequest(id = null, imagePrompt = imagePromptText)
+
+                GPTBuilderApi.create(requireContext()).generateImage(imageRequest).enqueue(object :
+                    Callback<List<Image>> {
+                    override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
+                        if (response.isSuccessful) {
+                            images = response.body() as MutableList<Image>
+                            temporaryAdapter.updateData(images)
+                            temporaryAdapter.notifyDataSetChanged()
+                        }
+                    }
+                    override fun onFailure(call: Call<List<Image>>, t: Throwable) {
+                        Log.e("Example", t.stackTraceToString())
+                    }
+                })
+            }
+        }
+
+
+        generateImageButton.setOnClickListener {
+            val imagePromptText = imagePrompt.text.toString()
+            if(imagePromptText.isNullOrEmpty()){
+                Toast.makeText(requireActivity(), "No se han completado el campo requerido", Toast.LENGTH_SHORT).show()
+            }else{
+                val imageRequest = ImageRequest(id = null, imagePrompt = imagePromptText)
+
+                GPTBuilderApi.create(requireContext()).generateImage(imageRequest).enqueue(object :
+                    Callback<List<Image>> {
+                    override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
+                        if (response.isSuccessful) {
+                            images = response.body() as MutableList<Image>
+                            temporaryAdapter.updateData(images)
+                            temporaryAdapter.notifyDataSetChanged()
+                        }
+                    }
+                    override fun onFailure(call: Call<List<Image>>, t: Throwable) {
+                        Log.e("Example", t.stackTraceToString())
+                    }
+                })
+            }
+        }
+
 
         return view
     }
@@ -66,35 +117,11 @@ class GeneratorFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        generateImageButton.setOnClickListener {
-            generateImage()
-        }
+
     }
 
 
-    private fun generateImage(){
-        val imagePromptText = imagePrompt.text.toString()
 
-        if(imagePromptText.isNullOrEmpty()){
-            Toast.makeText(requireActivity(), "No se han completado el campo requerido", Toast.LENGTH_SHORT).show()
-        }else{
-            val imageRequest = ImageRequest(id = null, imagePrompt = imagePromptText)
-
-            GPTBuilderApi.create(requireContext()).generateImage(imageRequest).enqueue(object :
-                Callback<List<Image>> {
-                override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
-                    if (response.isSuccessful) {
-                        images = response.body() as MutableList<Image>
-                        temporaryImageAdapter.updateData(images)
-                        temporaryImageAdapter.notifyDataSetChanged()
-                    }
-                }
-                override fun onFailure(call: Call<List<Image>>, t: Throwable) {
-                    Log.e("Example", t.stackTraceToString())
-                }
-            })
-        }
-    }
 
         }
 
