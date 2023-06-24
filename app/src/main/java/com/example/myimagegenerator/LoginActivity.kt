@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.myimagegenerator.services.saveEmail
 import com.example.myimagegenerator.services.saveToken
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -15,9 +16,6 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-
-
 
 class LoginActivity : AppCompatActivity() {
 
@@ -63,9 +61,10 @@ class LoginActivity : AppCompatActivity() {
                                 if (task.isSuccessful) {
 
                                     val token = task.result?.token.toString()
-
+                                    val email = currentUser?.email.toString()
                                     CoroutineScope(Dispatchers.Main).launch {
                                         saveToken(applicationContext,token)
+                                        saveEmail(applicationContext,email)
                                     }
 
                                 } else {
