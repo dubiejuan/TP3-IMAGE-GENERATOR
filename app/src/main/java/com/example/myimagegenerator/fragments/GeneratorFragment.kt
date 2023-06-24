@@ -15,13 +15,12 @@ import com.example.myimagegenerator.entities.ImageRequest
 import com.example.myimagegenerator.models.Image
 import com.example.myimagegenerator.services.GPTBuilderApi
 import androidx.appcompat.widget.AppCompatEditText
-import com.example.myimagegenerator.adapters.ImageAdapter
 import com.example.myimagegenerator.adapters.TemporaryAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GeneratorFragment : Fragment() {
+class GeneratorFragment : Fragment(), TemporaryAdapter.OnImageClickListener {
 
     var images: MutableList<Image> = ArrayList<Image>()
 
@@ -34,6 +33,8 @@ class GeneratorFragment : Fragment() {
     lateinit var imageVariantId: AppCompatEditText
     lateinit var imageToSaveId: AppCompatEditText
 
+    lateinit var idSelectedImage: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -44,14 +45,14 @@ class GeneratorFragment : Fragment() {
     ): View? {
 
 
-        val temporaryAdapter = TemporaryAdapter(images, requireContext())
+        val temporaryAdapter = TemporaryAdapter(images, requireContext(), this)
 
 
         val view = inflater.inflate(R.layout.fragment_generator, container, false)
 
         generateImageButton = view.findViewById(R.id.btnGeneratorFragmentGenerate)
-//        generateVariantImageButton = view.findViewById(R.id.btnFragmentGeneratorVariant)
-//        saveImageButton = view.findViewById(R.id.btnFragmentGeneratorSave)
+        generateVariantImageButton = view.findViewById(R.id.btnFragmentGeneratorVariant)
+        saveImageButton = view.findViewById(R.id.btnFragmentGeneratorSave)
         imagePrompt = view.findViewById(R.id.inputGeneratorFragment)
 
 
@@ -85,30 +86,13 @@ class GeneratorFragment : Fragment() {
             }
         }
 
-
-        generateImageButton.setOnClickListener {
-            val imagePromptText = imagePrompt.text.toString()
-            if(imagePromptText.isNullOrEmpty()){
-                Toast.makeText(requireActivity(), "No se han completado el campo requerido", Toast.LENGTH_SHORT).show()
-            }else{
-                val imageRequest = ImageRequest(id = null, imagePrompt = imagePromptText)
-
-                GPTBuilderApi.create(requireContext()).generateImage(imageRequest).enqueue(object :
-                    Callback<List<Image>> {
-                    override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
-                        if (response.isSuccessful) {
-                            images = response.body() as MutableList<Image>
-                            temporaryAdapter.updateData(images)
-                            temporaryAdapter.notifyDataSetChanged()
-                        }
-                    }
-                    override fun onFailure(call: Call<List<Image>>, t: Throwable) {
-                        Log.e("Example", t.stackTraceToString())
-                    }
-                })
-            }
+        saveImageButton.setOnClickListener {
+            saveImage()
         }
 
+        generateVariantImageButton.setOnClickListener {
+            generateVariantImage()
+        }
 
         return view
     }
@@ -117,13 +101,43 @@ class GeneratorFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-
     }
 
+    override fun onImageClick(id: String?) {
+          idSelectedImage = id!!;
+    }
 
+    private fun saveImage() {
+        var imageRequest = ImageRequest(idSelectedImage, imagePrompt = null)
 
+            GPTBuilderApi.create(requireContext()).saveImage(imageRequest).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                }
 
-        }
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("Example", t.stackTraceToString())
+                }
+            })
+    }
+
+    private fun generateVariantImage(){
+        var imageRequest = ImageRequest(idSelectedImage, imagePrompt = null)
+
+        GPTBuilderApi.create(requireContext()).generateVariant(imageRequest).enqueue(object :
+            Callback<List<Image>> {
+            override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
+                if (response.isSuccessful) {
+                    images = response.body() as MutableList<Image>
+                    temporaryAdapter.updateData(images)
+                    temporaryAdapter.notifyDataSetChanged()
+                }
+            }
+            override fun onFailure(call: Call<List<Image>>, t: Throwable) {
+                Log.e("Example", t.stackTraceToString())
+            }
+        })
+    }
+}
 
 
 

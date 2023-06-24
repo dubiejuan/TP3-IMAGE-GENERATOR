@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object GPTBuilderApi {
 
-    private const val IPV4 ="192.168.0.62"
+    private const val IPV4 ="192.168.0.15"
     private const val BASE_URL = "http://$IPV4:3000/api/"
     private val gson = GsonBuilder().setLenient().create()
 
