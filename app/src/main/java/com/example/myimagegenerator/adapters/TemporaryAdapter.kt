@@ -8,7 +8,7 @@ import com.example.myimagegenerator.R
 import com.example.myimagegenerator.holders.ImageViewHolder
 import com.example.myimagegenerator.models.Image
 
-class ImageAdapter(
+class TemporaryAdapter(
     private var images: MutableList<Image>,
     private val context: Context
 ) : RecyclerView.Adapter<ImageViewHolder>(){
@@ -18,7 +18,7 @@ class ImageAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.my_images_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.image_item_recycler_view, parent, false)
         return ImageViewHolder(view,context)
     }
 
