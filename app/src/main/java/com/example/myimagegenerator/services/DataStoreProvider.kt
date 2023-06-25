@@ -11,18 +11,34 @@ import kotlinx.coroutines.withContext;
 
 val Context.dataStore by preferencesDataStore(name = "USER_DATA")
 
-        suspend fun saveToken(context: Context, tokenId: String) {
-        withContext(Dispatchers.IO) {
+suspend fun saveToken(context: Context, tokenId: String) {
+    withContext(Dispatchers.IO) {
         context.dataStore.edit { preferences ->
-        preferences[stringPreferencesKey("tokenId")] = "Bearer $tokenId"
+            preferences[stringPreferencesKey("tokenId")] = "Bearer $tokenId"
         }
-        }
-        }
+    }
+}
 
-        suspend fun getToken(context: Context): String {
-        return withContext(Dispatchers.IO) {
+suspend fun getToken(context: Context): String {
+    return withContext(Dispatchers.IO) {
         context.dataStore.data.map { preferences ->
-        preferences[stringPreferencesKey("tokenId")].orEmpty()
+            preferences[stringPreferencesKey("tokenId")].orEmpty()
         }.first()
+    }
+}
+
+suspend fun saveEmail(context: Context, email: String) {
+    withContext(Dispatchers.IO) {
+        context.dataStore.edit { preferences ->
+            preferences[stringPreferencesKey("email")] = email
         }
+    }
+}
+
+suspend fun getEmail(context: Context): String {
+    return withContext(Dispatchers.IO) {
+        context.dataStore.data.map { preferences ->
+            preferences[stringPreferencesKey("email")].orEmpty()
+        }.first()
+    }
 }
