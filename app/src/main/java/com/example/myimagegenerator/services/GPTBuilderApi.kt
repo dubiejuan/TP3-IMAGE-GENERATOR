@@ -11,10 +11,11 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object GPTBuilderApi {
 
-    private const val IPV4 ="192.168.0.15"
+    private const val IPV4 ="192.168.0.62"
     private const val BASE_URL = "http://$IPV4:3000/api/"
     private val gson = GsonBuilder().setLenient().create()
 
@@ -28,7 +29,10 @@ object GPTBuilderApi {
                 println(getToken(context))
                 chain.proceed(newRequest)
             }
-        }.build()
+             connectTimeout(60, TimeUnit.SECONDS) // Increase connection timeout
+             readTimeout(60, TimeUnit.SECONDS) // Increase read timeout
+
+         }.build()
 
          val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

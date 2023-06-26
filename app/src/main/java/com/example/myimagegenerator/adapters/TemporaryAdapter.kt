@@ -15,9 +15,15 @@ class TemporaryAdapter(
     private val listener: OnImageClickListener
 ) : RecyclerView.Adapter<ImageViewHolder>(){
 
-    fun updateData(newImages: MutableList<Image>) {
+    fun setData(newImages: MutableList<Image>) {
         images = newImages
+        notifyDataSetChanged()
     }
+
+    fun updateData(newImage:Image ) {
+        images.add(newImage)
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.image_item_recycler_view, parent, false)
