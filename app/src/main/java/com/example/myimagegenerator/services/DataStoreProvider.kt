@@ -26,3 +26,21 @@ val Context.dataStore by preferencesDataStore(name = "USER_DATA")
         }.first()
         }
 }
+
+// Función para guardar el correo electrónico
+suspend fun saveEmail(context: Context, email: String) {
+        withContext(Dispatchers.IO) {
+                context.dataStore.edit { preferences ->
+                        preferences[stringPreferencesKey("email")] = email
+                }
+        }
+}
+
+// Función para obtener el correo electrónico
+suspend fun getEmail(context: Context): String {
+        return withContext(Dispatchers.IO) {
+                context.dataStore.data.map { preferences ->
+                        preferences[stringPreferencesKey("email")].orEmpty()
+                }.first()
+        }
+}
