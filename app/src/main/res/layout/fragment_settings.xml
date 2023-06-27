@@ -3,20 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-    android:layout_marginTop="50dp"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/txtSettingsFragmentTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:textColor="@color/light_purple"
-        android:textSize="32sp"
-        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewGenerales"
@@ -29,60 +17,37 @@
         android:textAlignment="gravity"
         android:textColor="@color/purple"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto"
+        android:drawableLeft="@drawable/settings"
+        android:drawableTint="@color/purple"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingHorizontal="24dp">
 
-        <TextView
-            android:id="@+id/textViewModoOscuro"
-            android:layout_width="261dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:lineSpacingExtra="5sp"
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="@string/dark_mode"
-            android:textColor="#001E2F"
-            android:textSize="20sp" />
+            android:fontFamily="@font/roboto"/>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/modoOscuroSwitch"
-            android:layout_width="56dp"
-            android:layout_height="48dp"
-            android:background="@drawable/rounded_switch"
-            android:backgroundTint="#D6D4D5" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="24dp">
-
-        <TextView
-            android:id="@+id/textViewNotificaciones"
-            android:layout_width="261dp"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="5sp"
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="@string/notifications"
-            android:textColor="#001E2F"
-            android:textSize="20sp" />
+            android:fontFamily="@font/roboto"/>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/notificacionesSwitch3"
-            android:layout_width="56dp"
-            android:layout_height="48dp"
-            android:background="@drawable/rounded_switch"
-            android:backgroundTint="#D6D4D5"
-            android:scaleX="1"
-            android:scaleY="1"
-            android:scrollHorizontally="false" />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/dev_mode"
+            android:fontFamily="@font/roboto"/>
 
     </LinearLayout>
 

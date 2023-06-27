@@ -21,18 +21,23 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 
 class GeneratorFragment : Fragment(), TemporaryAdapter.OnImageClickListener {
 
     var images: MutableList<Image> = ArrayList<Image>()
 
-    lateinit var generateImageButton: Button
-    lateinit var generateVariantImageButton: Button
-    lateinit var saveImageButton: Button
+    lateinit var generateImageButton: MaterialButton
+    lateinit var generateVariantImageButton: ExtendedFloatingActionButton
+    lateinit var saveImageButton: FloatingActionButton
     lateinit var temporaryAdapter : TemporaryAdapter
 
-    lateinit var imagePrompt: AppCompatEditText
+    lateinit var imagePrompt: TextInputLayout
 
     lateinit var idSelectedImage: String
 
@@ -52,7 +57,9 @@ class GeneratorFragment : Fragment(), TemporaryAdapter.OnImageClickListener {
         generateImageButton = view.findViewById(R.id.btnGeneratorFragmentGenerate)
         generateVariantImageButton = view.findViewById(R.id.btnFragmentGeneratorVariant)
         saveImageButton = view.findViewById(R.id.btnFragmentGeneratorSave)
+
         imagePrompt = view.findViewById(R.id.inputGeneratorFragment)
+
 
         generateVariantImageButton.isEnabled = false
         saveImageButton.isEnabled = false
@@ -95,7 +102,7 @@ class GeneratorFragment : Fragment(), TemporaryAdapter.OnImageClickListener {
     }
 
     private fun generateImage(){
-        val imagePromptText = imagePrompt.text.toString()
+        val imagePromptText = imagePrompt.editText?.text.toString()
         if(imagePromptText.isNullOrEmpty()){
             Toast.makeText(requireActivity(), "No se han completado el campo requerido", Toast.LENGTH_SHORT).show()
         }else{

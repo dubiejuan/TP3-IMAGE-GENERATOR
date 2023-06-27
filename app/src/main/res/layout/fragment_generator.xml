@@ -1,70 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.GeneratorFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:paddingHorizontal="16dp">
 
-        <TextView
-            android:id="@+id/txtFragmentGeneratorTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/generator"
-            android:textColor="@color/light_purple"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="32dp"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtFragmentGeneratorTitle">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputGeneratorFragment"
-                android:layout_width="240dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
-                android:autofillHints="prompt"
-                android:background="@drawable/input_generator_shape"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:paddingStart="8dp"
-                android:text="@string/image_input" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/prompt">
 
-            <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGeneratorFragmentGenerate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/btn_generator_generate"
-                android:drawableLeft="@drawable/icon_generator"
-                android:paddingHorizontal="8dp"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/generate"
-                android:textColor="@color/white" />
+                app:icon="@drawable/icon_generator"/>
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewTemporary"
-            android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,35 +61,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingVertical="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerViewTemporary">
 
-
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnFragmentGeneratorSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_generator_save"
-                android:text="@string/save"
-                android:textColor="@color/white" />
+                android:layout_margin="8dp"
+                android:contentDescription="@string/save"
+                app:srcCompat="@drawable/add" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/btnFragmentGeneratorVariant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/btn_generator_variant"
+                android:layout_margin="8dp"
+                android:contentDescription="@string/variant"
                 android:text="@string/variant"
-                android:textColor="@color/light_purple" />
+                app:icon="@drawable/icon_generator" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

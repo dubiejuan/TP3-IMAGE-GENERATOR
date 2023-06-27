@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -27,7 +28,7 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }
-        val registerBtn:Button = findViewById(R.id.register_button)
+        val registerBtn:Button = findViewById<AppCompatButton>(R.id.register_button)
 
         registerBtn.setOnClickListener{
             registerUser()
