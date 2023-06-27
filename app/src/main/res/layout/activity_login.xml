@@ -13,9 +13,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:text="@string/login"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/purple"
         android:textSize="32sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"/>
 
     <EditText
         android:id="@+id/email_edittext"
@@ -43,15 +44,15 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_button"
+        style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password_edittext"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="50dp"
-        android:background="@drawable/btn_generator_generate"
-        android:text="@string/login"
-        android:textColor="@color/design_default_color_on_primary" />
+        android:background="@drawable/btn_style"
+        android:text="@string/login_btn" />
 
     <TextView
 

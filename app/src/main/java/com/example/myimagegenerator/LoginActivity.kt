@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import com.example.myimagegenerator.services.saveEmail
 import com.example.myimagegenerator.services.saveToken
 import com.google.firebase.auth.FirebaseAuth
@@ -36,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
         }
-        val loginBtn : Button = findViewById(R.id.login_button)
+        val loginBtn : Button = findViewById<AppCompatButton>(R.id.login_button)
 
         loginBtn.setOnClickListener{
             loginUser()
