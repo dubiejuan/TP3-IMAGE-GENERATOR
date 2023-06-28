@@ -31,7 +31,7 @@ class ImageViewHolder(v: View, private val context: Context) : RecyclerView.View
         Picasso.get().load(finalURL).into(imageView, object : Callback {
             override fun onSuccess() {
                 // Image loaded successfully
-                Log.println(Log.ASSERT,"ImageLoadingSuccess", "Image loaded successfully")
+                Log.println(Log.INFO,"ImageLoadingSuccess", "Image loaded successfully")
             }
 
             override fun onError(e: Exception) {
