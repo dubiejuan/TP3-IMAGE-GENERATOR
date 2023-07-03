@@ -24,6 +24,7 @@
     <string name="notifications">Notificaciones</string>
     <string name="generated_image">imagen generada</string>
     <string name="image_generator">Image Generator</string>
+    <string name="logout">Cerrar sesión</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -126,7 +126,6 @@ class GeneratorFragment : Fragment(), TemporaryAdapter.OnImageClickListener {
     @SuppressLint("SuspiciousIndentation")
     private fun saveImage() {
 
-        findNavController().navigate(R.id.fragment_home)
         var imageRequest = ImageRequest(idSelectedImage, imagePrompt = null)
 
             GPTBuilderApi.create(requireContext()).saveImage(imageRequest).enqueue(object : Callback<Void> {
